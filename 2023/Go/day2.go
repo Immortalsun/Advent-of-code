@@ -207,7 +207,7 @@ func main() {
 
 		power := game.findPower()
 		fmt.Printf("Game %d cube power: %d\n", game.id, power)
-		sumOfPowers = sumOfPowers + game.findPower()
+		sumOfPowers = sumOfPowers + power
 	}
 
 	fmt.Printf("Part 2 Solution: %d", sumOfPowers)
