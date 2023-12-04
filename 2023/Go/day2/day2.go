@@ -140,7 +140,7 @@ func parseGame(gameLine string) *game {
 func main() {
 
 	//get path to input data file
-	inputPath, err := filepath.Abs("../../Data/day2Data.txt")
+	inputPath, err := filepath.Abs("../../../Data/day2Data.txt")
 	if err != nil {
 		fmt.Println("Relative path retrieval failed")
 	} else {
