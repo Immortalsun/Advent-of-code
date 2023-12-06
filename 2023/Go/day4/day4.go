@@ -17,9 +17,11 @@ func (n numSet) add(setItem int) {
 	n[setItem] = struct{}{}
 }
 
-func (n numSet) remove(setItem int) {
-	delete(n, setItem)
-}
+//unused removal function but leaving it for
+//documentation completeness
+// func (n numSet) remove(setItem int) {
+// 	delete(n, setItem)
+// }
 
 func (n numSet) contains(setItem int) bool {
 	_,has := n[setItem]
