@@ -1,10 +1,52 @@
-use std::{fs::File, io::{BufRead, BufReader}};
+use std::{fs::File, io::{BufRead, BufReader}, path::Iter};
 use clap::Parser;
 
 #[derive(Parser)]
 struct Cli {
     /// The pattern to look for
     part2: String,
+}
+
+enum Direction {
+    N,
+    S,
+    E,
+    W,
+    NE,
+    NW,
+    SE,
+    SW
+}
+
+struct StartPointCollection<'a> {
+    collection: &'a Vec<Vec<char>>,
+    start_row: usize,
+    start_col: usize,
+    dir: Direction
+}
+
+impl Iterator for StartPointCollection<'_> {
+    type Item = char;
+
+    fn next(&mut self) -> Option<Self::Item> {
+        match self.dir {
+            Direction::N => todo!(),
+
+            Direction::S => todo!(),
+
+            Direction::E => todo!(),
+
+            Direction::W => todo!(),
+
+            Direction::NE => todo!(),
+
+            Direction::NW => todo!(),
+
+            Direction::SE => todo!(),
+            
+            Direction::SW => todo!(),
+        }
+    }
 }
 
 fn main() -> std::io::Result<()> {
