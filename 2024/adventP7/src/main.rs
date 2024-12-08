@@ -1,6 +1,6 @@
 use std::{ fs::File, io::{BufRead, BufReader}};
 use clap::Parser;
-use itertools::{structs::Permutations, Itertools};
+use itertools::Itertools;
 use strum::IntoEnumIterator;
 use strum_macros::EnumIter;
 
@@ -13,7 +13,7 @@ struct Cli {
 #[derive(Debug, EnumIter, Clone, Copy)]
 enum Operator {
     ADD,
-    MULT
+    MULT,
 }
 
 #[derive(Debug, EnumIter, Clone, Copy)]
