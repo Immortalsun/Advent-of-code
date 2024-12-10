@@ -99,6 +99,12 @@ fn main() -> std::io::Result<()> {
                 //so if we skip any we need to adjust back to the original disk context
                 //by adding the skip count to the first empty index
                 let disk_search_start = first_empty + skip_counter;
+
+                //if we found an empty position beyond the start of our data
+                //its invalid, we don't need to continue searching
+                if disk_search_start > id_start_idx {
+                    break;
+                }
                 //starting at the next position after the empty slot, count contiguous empty slots
                 //until we reach a non empty value
                 for i in disk_search_start..disk.len() {
