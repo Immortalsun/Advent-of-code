@@ -92,19 +92,20 @@ fn main() -> std::io::Result<()> {
             while skip_counter < id_start_idx {
                 //find first available position of empty space
                 //we may skip some if we cannot find enough space at the first position
-                let first_empty = disk.iter().skip(skip_counter)
-                .position(|x| *x == empty_space).unwrap();
+                let try_empty = disk.iter().take(id_start_idx).skip(skip_counter)
+                .position(|x| *x == empty_space);
+
+                //if we don't find any empty elements in the range before the id_start, we can fail
+                if try_empty.is_none() {
+                    break;
+                }
+                let first_empty = try_empty.unwrap();
                 let mut empty_len: i64 = 0;
                 //position will return elements offset from the start of the list
                 //so if we skip any we need to adjust back to the original disk context
                 //by adding the skip count to the first empty index
                 let disk_search_start = first_empty + skip_counter;
 
-                //if we found an empty position beyond the start of our data
-                //its invalid, we don't need to continue searching
-                if disk_search_start > id_start_idx {
-                    break;
-                }
                 //starting at the next position after the empty slot, count contiguous empty slots
                 //until we reach a non empty value
                 for i in disk_search_start..disk.len() {
