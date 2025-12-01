@@ -1,16 +1,72 @@
-# This is a sample Python script.
+import math
 
-# Press Ctrl+F5 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def calc_zeros_at_stops(start):
+    with open("p1Full.txt", "r") as file:
+        current_position = start
+        zeros_counter = 0
+        for line in file:
+            direction = line[:1]
+            distance = int(line[1:])
 
+            if distance > 100:
+                distance = distance % 100
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press F9 to toggle the breakpoint.
+            match direction:
+                case "L":
+                    current_position = current_position - distance
+                case "R":
+                    current_position = current_position + distance
 
+            if current_position < 0:
+                current_position = current_position + 100
+            elif current_position >= 100:
+                current_position = current_position - 100
 
-# Press the green button in the gutter to run the script.
+            if current_position == 0:
+                zeros_counter += 1
+
+        print(zeros_counter)
+
+def calc_zeros_at_stops_and_pass_throughs(start):
+    with open("p1Full.txt", "r") as file:
+        current_position = start
+        starting_position = current_position
+        zeros_counter = 0
+        for line in file:
+            direction = line[:1]
+            distance = int(line[1:])
+
+            if distance > 100:
+                #account for passing through 0 on the way back to itself n times
+                zeros_counter += math.floor(distance/100)
+                distance = distance % 100
+
+            match direction:
+                case "L":
+                    current_position = current_position - distance
+                case "R":
+                    current_position = current_position + distance
+
+            if current_position < 0:
+                current_position = current_position + 100
+                #account for passing through 0 if we are not at 0
+                #and we did not start at 0
+                if current_position != 0 and starting_position != 0:
+                    zeros_counter += 1
+            elif current_position >= 100:
+                current_position = current_position - 100
+                # account for passing through 0 if we are not at 0
+                # and we did not start at 0
+                if current_position != 0 and starting_position != 0:
+                    zeros_counter += 1
+
+            if current_position == 0:
+                zeros_counter += 1
+
+            starting_position = current_position
+
+        print(zeros_counter)
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    calc_zeros_at_stops(50)
+    calc_zeros_at_stops_and_pass_throughs(50)
