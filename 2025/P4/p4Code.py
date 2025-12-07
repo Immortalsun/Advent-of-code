@@ -96,7 +96,7 @@ def count_adjacencies(start_x, start_y, input_arr):
 
 
 if __name__ == '__main__':
-    #find_available_rolls_p1()
+    find_available_rolls_p1()
     find_available_rolls_p2()
 
 
